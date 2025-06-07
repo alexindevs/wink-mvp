@@ -10,6 +10,8 @@ Whether you're:
 
 **WINK helps you figure out what to cook** based on what you *actually* have at home.
 
+[![Watch WINK Demo](https://cdn.loom.com/sessions/thumbnails/6e1cc275310f447886b1e013c4cfe070-with-play.gif)](https://www.loom.com/share/6e1cc275310f447886b1e013c4cfe070)
+
 ---
 
 ## 🌟 What It Does
@@ -47,7 +49,7 @@ WINK takes the *"what the hell do I cook"* decision off your plate, and helps yo
 
 ---
 
-## ❤️ Built by someone who gets it.
+## ❤️ Built by someone who gets it
 
 WINK is designed for utility, not perfection.
 Because some days, *figuring out dinner* is the real final boss.
