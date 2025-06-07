@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
-import geoip from 'fast-geoip'
 import { rateAndUsageLimiter } from '@/lib/rateLimiter';
 import { kv } from '@/lib/kv' // make sure this is correctly set up
+import { getIpLocation } from "ipapi-tools";
 
 interface MealSuggestion {
   name: string;
@@ -30,7 +30,7 @@ async function getMealImage(meal: MealSuggestion) {
     model: 'dall-e-3',
     prompt,
     n: 1,
-    size: '512x512',
+    size: '1024x1024',
     response_format: 'url',
   })
 
@@ -73,8 +73,8 @@ export async function POST(req: NextRequest) {
     if (!limit.ok) {
       return NextResponse.json({ error: limit.reason }, { status: 429 });
     }
-    const geo = await geoip.lookup(ip || '')
-    const location = geo ? `${geo.city ?? ''}, ${geo.region}, ${geo.country}` : 'an unknown location'
+    const geo = await getIpLocation(ip);
+    const location = geo ? `${geo.city ?? ''}, ${geo.regionName || geo.region || ''}, ${geo.country}` : 'an unknown location'
     console.log('Detected location:', location);
 
     const systemPrompt = `
