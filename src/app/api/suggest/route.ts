@@ -87,7 +87,7 @@ Rules for each meal:
 3. Additional common staples (salt, water, seasoning cubes, oil) may be listed without marking them missing.
 4. If a recipe needs something the user lacks, list it in "missingIngredients" exactly as it appears in "ingredients".
 5. Each recipe must have **at least 8** steps.
-6. Dishes should be realistic for ${location} - avoid uncommon fusions unless explicitly popular in ${location}.W
+6. Dishes should be realistic for ${location} - avoid uncommon fusions unless explicitly popular in ${location}.
 7. Ensure each meal has the food classes required for survival: protein (meat, egg and fish or plant sources), carbohydrates, fats, vitamins, minerals.
 
 EXAMPLE (do NOT repeat, just mimic format):
