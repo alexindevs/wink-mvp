@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { MealSuggestion, Suggestions } from '@/components/output/Suggestions';
 import { MealModal } from '@/components/output/MealModal';
 import { ShoppingListModal } from '@/components/output/ShoppingList';
+import { toast } from 'sonner';
 
 export default function Home() {
   const [ingredients, setIngredients] = useState('')
@@ -40,8 +41,16 @@ export default function Home() {
         day: weekday,
       }),
     })
-  
+    
     const data = await res.json()
+    if (!res.ok) {
+      toast.error(data.error || 'Something went wrong', {
+        description: 'Try again later or check your limits.',
+        duration: 5000,
+      });
+      setLoading(false);
+      return;
+    }
     setSuggestions(data.result)
     setLoading(false)
   }

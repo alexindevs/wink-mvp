@@ -2,6 +2,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 import geoip from 'fast-geoip'
+import { rateAndUsageLimiter } from '@/lib/rateLimiter';
+import { kv } from '@/lib/kv' // make sure this is correctly set up
 
 interface MealSuggestion {
   name: string;
@@ -15,6 +17,39 @@ interface MealSuggestion {
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
+
+async function getMealImage(meal: MealSuggestion) {
+  const cacheKey = `meal:image:${meal.name.toLowerCase().replace(/\s+/g, '_')}`
+  const cachedUrl = await kv.get<string>(cacheKey)
+
+  if (cachedUrl) return cachedUrl
+
+  const prompt = `Top-down photo of a beautifully plated dish of ${meal.name}, made with ${meal.ingredients.join(', ')}. Styled like a food magazine shoot, realistic lighting.`
+
+  const imageRes = await openai.images.generate({
+    model: 'dall-e-3',
+    prompt,
+    n: 1,
+    size: '512x512',
+    response_format: 'url',
+  })
+
+  if (!imageRes?.data?.length) {
+    console.error(`Image generation failed for ${meal.name}:`, imageRes.data)
+    return null
+  }
+
+  const imageUrl = imageRes.data[0]?.url
+  if (!imageUrl) {
+    console.error(`Image URL not found for ${meal.name}:`, imageRes.data)
+    return null
+  }
+
+  await kv.set(cacheKey, imageUrl)
+  await kv.expire(cacheKey, 60 * 60 * 24 * 7);
+
+  return imageUrl
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -30,13 +65,17 @@ export async function POST(req: NextRequest) {
     } else if (realIp) {
       ip = realIp;
     } else {
-      // In development, you might get null, so provide a fallback
-      ip = '127.0.0.1'; // or just leave empty string
+      ip = '127.0.0.1';
     }
     
     console.log('Detected IP:', ip);
+    const limit = await rateAndUsageLimiter(ip);
+    if (!limit.ok) {
+      return NextResponse.json({ error: limit.reason }, { status: 429 });
+    }
     const geo = await geoip.lookup(ip || '')
     const location = geo ? `${geo.city ?? ''}, ${geo.region}, ${geo.country}` : 'an unknown location'
+    console.log('Detected location:', location);
 
     const systemPrompt = `
 You are a helpful kitchen assistant.
@@ -79,23 +118,8 @@ Do not include any text before or after the JSON. Do not include any markdown fo
     // For each suggestion, generate a food image
     const suggestionsWithImages = await Promise.all(
       suggestions.map(async (suggestion) => {
-        const prompt = `Top-down photo of a beautifully plated dish of ${suggestion.name}, made with ${suggestion.ingredients.join(", ")}. It's a dish native to " Styled like a food magazine shoot, realistic lighting.`;
-
         try {
-          const imageRes = await openai.images.generate({
-            model: "dall-e-2",
-            prompt,
-            n: 1,
-            size: "512x512",
-            response_format: "url", // use "b64_json" if you want base64 instead
-          });
-
-          if (!imageRes || !imageRes.data || imageRes.data.length === 0) {
-            console.error(`Image generation failed for ${suggestion.name}:`, imageRes.data);
-            return { ...suggestion, picture: null };
-          }
-
-          const imageUrl = imageRes.data[0]?.url ?? null;
+          const imageUrl = await getMealImage(suggestion);
           return { ...suggestion, picture: imageUrl };
         } catch (imageError) {
           console.error(`Image generation failed for ${suggestion.name}:`, imageError);

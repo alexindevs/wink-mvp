@@ -15,6 +15,9 @@
 
   /* everything else can stay default or inherit */
   --radius: 0.625rem;
+  --popover: var(--input);
+  --popover-foreground: var(--text-primary);
+  --border: oklch(0.9 0 0); /* or use --input if you want a softer border */
 }
 
 .dark {
@@ -26,6 +29,9 @@
   --accent-foreground: oklch(0.1994 0.0108 132.78);;
   --input: oklch(0.3234 0.0207 130.89);
   --muted: oklch(0.3234 0.0207 130.89);
+  --popover: var(--input);
+  --popover-foreground: var(--text-primary);
+  --border: oklch(0.4 0 0); /* darker border for dark mode */
 }
 
 @theme inline {
@@ -34,8 +40,6 @@
   --color-muted: var(--text-secondary);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
