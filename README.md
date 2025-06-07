@@ -10,8 +10,14 @@ Whether you're:
 
 **WINK helps you figure out what to cook** based on what you *actually* have at home.
 
-[![Watch WINK Demo](https://cdn.loom.com/sessions/thumbnails/6e1cc275310f447886b1e013c4cfe070-with-play.gif)](https://www.loom.com/share/6e1cc275310f447886b1e013c4cfe070)
-
+<div>
+    <a href="https://www.loom.com/share/6e1cc275310f447886b1e013c4cfe070">
+      <p>What's in my kitchen?</p>
+    </a>
+    <a href="https://www.loom.com/share/6e1cc275310f447886b1e013c4cfe070">
+      <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/6e1cc275310f447886b1e013c4cfe070-2a104e8d163637be-full-play.gif">
+    </a>
+  </div>
 ---
 
 ## 🌟 What It Does
