@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🍽️ WINK — What's In (N)My Kitchen?
 
-## Getting Started
+WINK is a free, AI-powered meal suggestion tool built for real-life kitchens and real-life chaos.
 
-First, run the development server:
+Whether you're:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+* living on a budget,
+* juggling work and family,
+* or just **staring blankly into your fridge** again...
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**WINK helps you figure out what to cook** based on what you *actually* have at home.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🌟 What It Does
 
-## Learn More
+* ✅ **Type what you’ve got** in your kitchen (e.g. “rice, onions, tomato paste”).
+* 🤖 **Get instant meal ideas**, tailored to your ingredients.
+* 👩🏽‍🍳 **See full recipes**: ingredients, steps, and what you're missing.
+* 🛒 **Add missing items to a shopping list** with one click.
+* 📋 **Copy recipes** for later, or plan your next meal on the go.
 
-To learn more about Next.js, take a look at the following resources:
+No logins. No tracking. Just food help.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🚀 Why WINK?
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Because cooking doesn’t need to feel like a boss battle.
+WINK takes the *"what the hell do I cook"* decision off your plate, and helps you make better use of what’s already in your kitchen.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🧠 Who’s It For?
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* 🧠 Folks who get overwhelmed planning meals
+* 🍼 Busy moms who need ideas *fast*
+* 💼 Working professionals on tight schedules
+* 🧍🏾 Anyone tired of wasting food or eating noodles every day
+
+---
+
+## 🛠️ Coming Soon
+
+* Barcode scanning
+* Saved favorites
+* Weekly meal planning
+* Offline mode
+
+---
+
+## ❤️ Built by someone who gets it.
+
+WINK is designed for utility, not perfection.
+Because some days, *figuring out dinner* is the real final boss.
